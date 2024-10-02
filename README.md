@@ -1,4 +1,14 @@
 # IIS
 Интеграция Информационных Систем <br>
-User Case <br>
-![User Case](https://github.com/Tissing/IIS/blob/main/Автомойка.png)
+
+# Esatimates (Примерные показатели):
+  Регион: Сахалинская область <br>
+  Численность региона: 500К человек <br>
+  DAU: 15% от 500К = 75К <br>
+  RPS: 75K/24/3600 ~= 1 
+
+# Функциональные требования:
+  ![User Case](https://github.com/Tissing/IIS/blob/main/UserCases.png)
+
+# Нефункциональные требования:
+
