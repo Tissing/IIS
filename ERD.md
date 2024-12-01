@@ -1,0 +1,36 @@
+# ERD для БД Автомойки
+# Схема
+![erd](ERD.png)
+
+# Скрипт
+```
+Автомойки {
+	id integer pk increments unique
+	широта float
+	долгота float
+}
+
+Услуги {
+	id integer pk increments unique
+	Услуга varchar(120)
+	Цена integer
+}
+
+Записи {
+	id integer pk increments unique
+	клиент integer *> Клиент.id
+	автомойка integer *> Автомойки.id
+	услуга integer *> Услуги.id
+	стоимость integer
+	дата_время datetime
+	оплачено bool def(false)
+	закончен bool def(false)
+}
+
+Клиент {
+	id integer pk increments unique
+	ФИО varchar
+	Марка varchar
+	Номер varchar
+}
+```
