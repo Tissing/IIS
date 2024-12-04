@@ -1,0 +1,405 @@
+openapi: 3.0.3
+info:
+  title: Спецификация OpenAPI для приложения автомойки
+  description: |-
+    This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about
+    Swagger at [https://swagger.io](https://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!
+    You can now help us improve the API whether it's by making changes to the definition itself or to the code.
+    That way, with time, we can improve the API in general, and expose some of the new features in OAS3.
+
+    _If you're looking for the Swagger 2.0/OAS 2.0 version of Petstore, then click [here](https://editor.swagger.io/?url=https://petstore.swagger.io/v2/swagger.yaml). Alternatively, you can load via the `Edit > Load Petstore OAS 2.0` menu option!_
+    
+    Some useful links:
+    - [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)
+    - [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://petstore3.swagger.io/api/v3
+tags:
+  - name: user
+    description: Операции с клиентом
+  - name: order
+    description: Записи заказов
+  - name: washer
+    description: Работа с автомойками
+  
+paths:
+  /user:
+    post:
+      tags:
+        - user
+      summary: Создание пользователя
+      description: Создание пользователя
+      operationId: createUser
+      requestBody:
+        description: Создание объекта пользователя
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+  /users:
+    get:
+      tags:
+        - user
+      summary: Список пользователей
+      description: Выводит список id зарегистрированных пользователй
+      operationId: getUsers
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/IdArray'
+  /user/{id}:
+    get:
+      tags:
+        - user
+      summary: Получить пользователя по id
+      description: ''
+      operationId: getUserById
+      parameters:
+        - name: id
+          in: path
+          description: id пользователя
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Неправильный формат id
+        '404':
+          description: Пользователь с таким id не найден
+    put:
+      tags:
+        - user
+      summary: Отредактировать пользователя
+      description: Изменение данных
+      operationId: updateUserById
+      parameters:
+        - name: id
+          in: path
+          description: id пользователя, у которого нужно поменять данные
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Update an existent user in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+            description: Операция прошла успешно
+    delete:
+      tags:
+        - user
+      summary: Удалить пользователя
+      description: Удаляет пользователя из системы по его id.
+      operationId: deleteUserbyId
+      parameters:
+        - name: id
+          in: path
+          description: id пользователя, которого нужно удалить
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Не правильный формат ввода id
+        '404':
+          description: Пользователь не найден
+  /washer:
+    post:
+      tags:
+       - washer
+      summary: Создание автомойки
+      description: Создание автомойки
+      operationId: createWasher
+      requestBody:
+        description: Создание объекта автомойки
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Washer'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Washer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Washer'
+      responses:
+        default:
+          description: Операция проведена успешно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Washer'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Washer'
+  /washers:
+    get:
+        tags:
+          - washer
+        summary: Список пользователей
+        description: Выводит список id зарегистрированных пользователй
+        operationId: getWashers
+        responses:
+          default:
+            description: successful operation
+            content:
+              application/json:
+                  schema:
+                    $ref: '#/components/schemas/IdArray'
+  /washer/{id}:
+    get:
+      tags:
+        - washer
+      summary: Получить автомойку по id
+      description: ''
+      operationId: getWasherById
+      parameters:
+        - name: id
+          in: path
+          description: id автомойки
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Операция прошла успешно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Washer'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Washer'
+        '400':
+          description: Неправильный формат id
+        '404':
+          description: Автомойка с таким id не найдена
+    put:
+      tags:
+        - washer
+      summary: Отредактировать пользователя
+      description: Изменение данных
+      operationId: updateWasherById
+      parameters:
+        - name: id
+          in: path
+          description: id автомойки, у которой нужно поменять данные
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Update an existent user in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Washer'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Washer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Washer'
+      responses:
+        '200':
+            description: Операция прошла успешно
+    delete:
+      tags:
+        - washer
+      summary: Удалить автомойку
+      description: Удаляет автомойку из системы по ее id.
+      operationId: deleteWasherById
+      parameters:
+        - name: id
+          in: path
+          description: id автомойки, которую нужно удалить
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Не правильный формат ввода id
+        '404':
+          description: Автомойка не найдена
+    
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: Иванов Иван Иванович
+        phone:
+          type: string
+          description: Телефонный номер клиента
+          example: +7(9XX)XXX-XX-XX
+        gov_number:
+          type: string
+          description: Гос. номер автомобиля 
+          example: x111xx65rus
+      xml:
+        name: user
+    IdArray:
+      type: object
+      properties:
+        id:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 10
+      xml:
+        name: usersArray
+    Washer:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 111
+        longtitude:
+          type: number
+          example: 77.59
+        latitude:
+          type: number
+          example: 39.11
+      xml:
+        name: washer
+    Order:
+      type: object
+      properties:
+        id: 
+          type: integer
+          format: int64
+          example: 123
+        client_id: 
+          type: integer
+          format: int64
+          example: 123
+        washer_id: 
+          type: integer
+          format: int64
+          example: 123
+        service_id: 
+          type: integer
+          format: int64
+          example: 123
+        amount: 
+          type: integer
+          format: int64
+          example: 10000
+        date_time: 
+          type: string
+          format: date-time
+        paid:
+          type: boolean
+        complete: 
+          type: boolean
+      xml:
+        name: order
+    Service:
+      type: object
+      properties:
+        id: 
+          type: integer
+          format: int64
+        name:
+          type: string
+          example: Помыть авто
+        amount: 
+          type: integer
+          format: int64
+          
+          
+          
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+      xml:
+        name: '##default'
+  requestBodies:
+    IdArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/User'
+  securitySchemes:
+    petstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+          scopes:
+            write:pets: modify pets in your account
+            read:pets: read your pets
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
