@@ -1,5 +1,5 @@
 # C4 модель
 ## C1
-![C1](https://github.com/Tissing/IIS/blob/main/%D0%A11.png)
+![C1](/materials/С1.png)
 ## C2
-![C1](https://github.com/Tissing/IIS/blob/main/%D0%A12.png)
+![C1](/materials/С2.png)
