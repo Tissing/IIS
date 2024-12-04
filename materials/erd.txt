@@ -1,30 +1,33 @@
 
+
 Автомойки {
 	id integer pk increments unique
-	широта float
-	долгота float
+	Долгота float
+	Широта float
+	Услуги set
+}
+
+Клиенты {
+	id integer pk increments unique
+	ФИО integer
+	Номер_телефона varchar
+	Марка_машины varchar
+	Гос_номер varchar
 }
 
 Услуги {
 	id integer pk increments unique
-	Услуга varchar(120)
+	Название varchar
 	Цена integer
 }
 
 Записи {
 	id integer pk increments unique
-	клиент integer *> Клиент.id
-	автомойка integer *> Автомойки.id
-	услуга integer *> Услуги.id
-	стоимость integer
-	дата_время datetime
-	оплачено bool def(false)
-	закончен bool def(false)
-}
-
-Клиент {
-	id integer pk increments unique
-	ФИО varchar
-	Марка varchar
-	Номер varchar
+	Клиент_id integer *> Клиенты.id
+	Автомойка_id integer *> Автомойки.id
+	Услуга_id integer *> Услуги.id
+	Стоимость integer
+	Дата_Время datetime
+	Оплачено bool
+	Завершено bool
 }
