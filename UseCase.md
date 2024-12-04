@@ -23,7 +23,7 @@
 
 
 ## Функциональные требования:
- ![User Case](UserCases.png)
+ ![User Case](/materials/UserCases.png)
 ### Сценарии использования
 #### UC1: Найти автомойку
  <table>
