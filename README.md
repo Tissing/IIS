@@ -4,3 +4,4 @@
 3. [ERD структура БД](ERD.md).
 4. [C4 модель (C1 и C2)](С4_model.md).
 5. [Спецификация OpenAPI](openapi.yaml).
+6. [Sequence диаграммы](sequence.md)
