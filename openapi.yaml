@@ -75,7 +75,7 @@ paths:
             application/x-www-form-urlencoded:
                 schema:
                   $ref: '#/components/schemas/IdArray'
-  /user/{id}:
+  /user/{UserId}:
     get:
       tags:
         - user
@@ -83,7 +83,7 @@ paths:
       description: Получить пользователя по id
       operationId: getUserById
       parameters:
-        - name: id
+        - name: UserId
           in: path
           description: id пользователя
           required: true
@@ -111,7 +111,7 @@ paths:
       description: Изменение данных пользователя
       operationId: updateUserById
       parameters:
-        - name: id
+        - name: UserId
           in: path
           description: id пользователя
           required: true
@@ -144,7 +144,7 @@ paths:
       description: Удаляет пользователя из системы по его id.
       operationId: deleteUserbyId
       parameters:
-        - name: id
+        - name: UserId
           in: path
           description: id пользователя
           required: true
@@ -209,7 +209,7 @@ paths:
               application/x-www-form-urlencoded:
                 schema:
                   $ref: '#/components/schemas/WashersList'
-  /washer/{id}:
+  /washer/{WasherId}:
     get:
       tags:
         - washer
@@ -217,7 +217,7 @@ paths:
       description: Получить автомойку по id
       operationId: getWasherById
       parameters:
-        - name: id
+        - name: WasherId
           in: path
           description: id автомойки
           required: true
@@ -245,7 +245,7 @@ paths:
       description: Изменение данных автомойки
       operationId: updateWasherById
       parameters:
-        - name: id
+        - name: WasherId
           in: path
           description: id автомойки
           required: true
@@ -278,7 +278,7 @@ paths:
       description: Удаляет автомойку по id
       operationId: deleteWasherById
       parameters:
-        - name: id
+        - name: WasherId
           in: path
           description: id автомойки
           required: true
@@ -297,7 +297,7 @@ paths:
       tags:
         - order
       summary: Создать заказ
-      description: Создание нового заказа
+      description: Формирование заказа пользователя
       operationId: createOrder
       requestBody:
         description: Объект нового заказа
@@ -343,7 +343,7 @@ paths:
               application/x-www-form-urlencoded:
                 schema:
                   $ref: '#/components/schemas/OrdersList'
-  /order/{id}:
+  /order/{OrderId}:
     get:
       tags:
         - order
@@ -351,7 +351,7 @@ paths:
       description: Получить заказ по его id
       operationId: getOrderById
       parameters:
-        - name: id
+        - name: OrderId
           in: path
           description: id заказа
           required: true
@@ -379,7 +379,7 @@ paths:
       description: Изменение данных о заказе
       operationId: updateOrderById
       parameters:
-        - name: id
+        - name: OrderId
           in: path
           description: id заказа
           required: true
@@ -412,7 +412,7 @@ paths:
       description: Удаляет заказ по id
       operationId: deleteOrderbyId
       parameters:
-        - name: id
+        - name: OrderId
           in: path
           description: id заказа
           required: true
@@ -424,6 +424,35 @@ paths:
           description: Заказ удален
         '400':
           description: Не правильный формат ввода id
+        '404':
+          description: Заказ не найден
+  /order/{OrderId}/pay:
+    post:
+      tags:
+        - order
+      summary: Оплатить заказ
+      description: Оплата заказа с использованием платежной онлайн системы
+      operationId: payOrder
+      parameters:
+        - name: OrderId
+          in: path
+          description: id заказа
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Заказ оплачен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Заказ уже оплачен
         '404':
           description: Заказ не найден
   /service:
@@ -477,7 +506,7 @@ paths:
             application/x-www-form-urlencoded:
               schema:
                 $ref: '#/components/schemas/ServicesList'
-  /service/{id}:
+  /service/{ServiceId}:
     get:
       tags:
         - service
@@ -485,7 +514,7 @@ paths:
       description: Получить услугу по id
       operationId: getServiceById
       parameters:
-        - name: id
+        - name: ServiceId
           in: path
           description: id услуги
           required: true
@@ -513,7 +542,7 @@ paths:
       description: Изменение данных услуги
       operationId: updateServiceById
       parameters:
-        - name: id
+        - name: ServiceId
           in: path
           description: id услуги
           required: true
@@ -546,7 +575,7 @@ paths:
       description: Удаляет услугу по id
       operationId: deleteServiceById
       parameters:
-        - name: id
+        - name: ServiceId
           in: path
           description: id услуги
           required: true
@@ -560,6 +589,8 @@ paths:
           description: Не правильный формат ввода id
         '404':
           description: Услуга не найдена        
+  
+    
     
 components:
   schemas:
