@@ -1,6 +1,6 @@
 # ERD для БД Автомойки
 # Схема
-![erd](/materials/ERD.png)
+![erd](/materials/ERD1.png)
 
 # Скрипт
 ```
