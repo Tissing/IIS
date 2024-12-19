@@ -2,22 +2,25 @@
 left to right direction
 actor "Клиент" as fc
 rectangle Автомойка {
-  usecase "Найти автомойку" as UC1
-  usecase "Выбрать дату и время" as UC2
-  usecase "Оплатить" as UC3
-  usecase "Выбрать услугу" as UC4
-  usecase "Отменить запись" as UC5
-  usecase "Тех поддержка" as UC6
+  usecase "Сделать заказ" as UC1
+  usecase "Найти автомойку" as UC1.1
+  usecase "Выбрать дату и время" as UC1.2
+  usecase "Оплатить" as UC1.3
+  usecase "Выбрать услугу" as UC1.4
+  usecase "Отменить запись" as UC2
+  usecase "Тех поддержка" as UC3
 }
 
 rectangle "Платежная система" as pl 
 
 fc --> UC1
+UC1 ..> UC1.1: <include>
+UC1 ..> UC1.2: <include>
+UC1 ..> UC1.3: <include>
+UC1 ..> UC1.4: <include>
 fc --> UC2
 fc --> UC3
-fc --> UC4
-fc --> UC5
-fc --> UC6
-UC3 <-- pl
+
+UC1.3 <-- pl
 
 @enduml
