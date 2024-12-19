@@ -700,6 +700,13 @@ components:
         latitude:
           type: number
           example: 39.11
+        address:
+          type: string
+          example: "Ул. Ленина, д. 222"
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
       xml:
         name: washer
     Order:
