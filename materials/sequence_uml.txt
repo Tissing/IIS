@@ -30,3 +30,32 @@ api <-- db: Заказ успешно записан
 client <-- api: Заказ успешно создан
 
 @enduml
+
+@startuml
+actor client as "Клиент"
+participant api as "API сервис автомойки"
+database db as "База данных"
+participant ps as "Платежная система"
+
+client -> api: Смотрит свои заказы\n/orders/{UserId}
+api -> db: Запрос на список\n заказов пользователя
+api <-- db: Список заказов
+client <-- api: Список заказов
+
+client -> api: Выбирает заказ\n/order/{OrderId}
+api -> db: Запрос заказа\nпользователя по OrderId
+api <-- db: Информация о заказе
+client <-- api: Информация о заказе
+
+client -> client: Выбирает способ оплаты
+client -> api: Нажимает кнопку "Оплатить"\n/order/{OrderId}/pay
+api -> api: Проверяет заказ
+api -> ps: Запрос на оплату заказа
+ps -> client: Запрос на оплату
+client --> ps: Оплачивает
+api <-- ps: Заказ оплачен
+api -> db: Меняет статус isPaid\n заказа на true
+api <-- db: Статус успешно изменен
+client <-- api: Заказ успешно оплачен
+
+@enduml
